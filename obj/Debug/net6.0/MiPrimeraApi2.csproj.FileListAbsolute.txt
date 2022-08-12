@@ -31,3 +31,13 @@ C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\bin\Debug\net6.0\runtimes\
 C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.csproj.AssemblyReference.cache
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.AssemblyInfoInputs.cache
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.AssemblyInfo.cs
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.csproj.CoreCompileInputs.cache
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.dll
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\refint\MiPrimeraApi2.dll
+C:\Users\vikko\Documents\Curso C#\Repos\MiPrimeraApi2\MiApiDeEjemplo\obj\Debug\net6.0\MiPrimeraApi2.pdb

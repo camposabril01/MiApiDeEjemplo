@@ -6,12 +6,12 @@ namespace MiPrimeraApi2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProductoController : ControllerBase
+    public class VentaController : ControllerBase
     {
-        [HttpGet(Name = "GetProductos")]
-        public List<Producto> GetProductos()
+        [HttpGet(Name = "GetVentas")]
+        public List<Venta> GetVentas()
         {
-            return ProductoHandler.GetProductos();
+            return VentaHandler.GetVentas();
         }
     }
 }
