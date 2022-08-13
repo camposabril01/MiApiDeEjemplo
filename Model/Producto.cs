@@ -9,16 +9,15 @@
         public int Stock { get; set; }
         public int IdUsuario { get; set; }
 
-        public Producto(int id, string descripcion, float costo, float precioVenta, int stock, string idUsuario)
-        {
-            Id = id;
-            Descripcion = descripcion;
-            Costo = costo;
-            PrecioVenta = precioVenta;
-            Stock = stock;
-            IdUsuario = idUsuario;
-        }
+        //public Producto(int id, string descripcion, float costo, float precioVenta, int stock, int idUsuario)
+        //{
+        //    Id = id;
+        //    Descripciones = descripcion;
+        //    Costo = costo;
+        //    PrecioVenta = precioVenta;
+        //    Stock = stock;
+        //    IdUsuario = idUsuario;
+        //}
     }
 
-}
 }

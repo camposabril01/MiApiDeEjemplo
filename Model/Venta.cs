@@ -2,12 +2,12 @@
 
 public class Venta
 {
-    private int Id { get; set; }
-    private string Comentarios { get; set; }
+    public int Id { get; set; }
+    public string Comentarios { get; set; }
 
-    public Venta(int id, string comentarios)
-    {
-        Id = id;
-        Comentarios = comentarios;
-    }
+    //public Venta(int id, string comentarios)
+    //{
+    //    Id = id;
+    //    Comentarios = comentarios;
+    //}
 }

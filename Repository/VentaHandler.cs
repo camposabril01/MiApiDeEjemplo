@@ -9,12 +9,12 @@ namespace MiPrimeraApi2.Repository
        "Server = UTOPÍA\\SQLEXPRESS; Database = SistemaGestion; Trusted_Connection = True; Persist Security Info=False; Encrypt=False";
 
 
-        public static List<ProductoVendido> GetVentas()
+        public static List<Venta> GetVentas()
         {
             List<Venta> resultados = new List<Venta>();
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM ProductoVendido", sqlConnection))
+                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Venta", sqlConnection))
                 {
                     sqlConnection.Open();
 

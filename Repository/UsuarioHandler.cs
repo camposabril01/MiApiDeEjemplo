@@ -45,5 +45,22 @@ namespace MiPrimeraApi2.Repository
 
             return resultados;
         }
+
+        /*public static bool GetUsuarioAndContrasena(string nUsuario, string nContrasena)
+        {
+            List<Usuario> resultados = new List<Usuario>();
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand
+                                ("SELECT Usuario.NombreUsuario, Usuario.Contraseña FROM Usuario", sqlConnection))
+                {
+                    sqlConnection.Open();
+        
+                    sqlConnection.Close();
+                }
+            }
+            
+
+        }*/
     }
 }
