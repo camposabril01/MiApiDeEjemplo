@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiPrimeraApi2.csproj": {}
+    "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiApiDeEjemplo\\MiPrimeraApi2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiPrimeraApi2.csproj": {
+    "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiApiDeEjemplo\\MiPrimeraApi2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiPrimeraApi2.csproj",
+        "projectUniqueName": "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiApiDeEjemplo\\MiPrimeraApi2.csproj",
         "projectName": "MiPrimeraApi2",
-        "projectPath": "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiPrimeraApi2.csproj",
+        "projectPath": "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiApiDeEjemplo\\MiPrimeraApi2.csproj",
         "packagesPath": "C:\\Users\\vikko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\obj\\",
+        "outputPath": "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiApiDeEjemplo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vikko\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,7 +55,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -67,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

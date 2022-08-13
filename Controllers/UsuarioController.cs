@@ -13,5 +13,14 @@ namespace MiPrimeraApi2.Controllers
         {
             return UsuarioHandler.GetUsuarios();
         }
+
+        [HttpGet("{nombreUsuario}/{contraseña}")]
+        public bool GetUsuarioAndContrasena(string nombreUsuario, string contraseña)
+        {
+            bool permitirLogin;
+            permitirLogin = UsuarioHandler.GetUsuarioAndContrasena(nombreUsuario, contraseña);
+
+            return permitirLogin;
+        }
     }
 }

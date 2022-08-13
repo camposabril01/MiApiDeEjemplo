@@ -1,4 +1,5 @@
 ﻿using MiPrimeraApi2.Model;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace MiPrimeraApi2.Repository
@@ -44,6 +45,38 @@ namespace MiPrimeraApi2.Repository
             }
 
             return resultados;
+        }
+
+        public static bool GetUsuarioAndContrasena(string nUsuario, string nContrasena)
+        {
+            bool resultado = false;
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "SELECT Usuario.NombreUsuario, Usuario.Contraseña FROM Usuario WHERE NombreUsuario = @nUsuario AND Contraseña = @nContrasena;";
+                
+                using (SqlCommand sqlCommand = new SqlCommand
+                                (commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@nUsuario", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@nUsuario"].Value = nUsuario;
+                    sqlCommand.Parameters.Add("@nContrasena", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@nContrasena"].Value = nContrasena;
+
+                    sqlConnection.Open();
+                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
+                    {
+                        SqlCommand command = new SqlCommand(commandText, sqlConnection);
+                        //chequea si hay filas
+                        if (dataReader.HasRows)
+                        {
+                            resultado = true;
+                        }
+                    }
+                    sqlConnection.Close();
+                }
+            }
+
+            return resultado;
         }
     }
 }

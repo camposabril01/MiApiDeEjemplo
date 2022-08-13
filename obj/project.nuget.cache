@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wlYX/PXV4nvuyVPdeJzW8ikMCG59NNroaASyn8rqx5R+yBoWTWmiVNi/t1xVOSxTfSXtyBTghtaWFXEpY3oLLQ==",
+  "dgSpecHash": "mUY6Sz6KiUA15+jvt1r5fmsEYVVkFv23TYX5GccCNrT7tzm0UWc0I9Ry23aHqfziQsenSlRgtKw7wU7FAwygsg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiPrimeraApi2.csproj",
+  "projectFilePath": "C:\\Users\\vikko\\Documents\\Curso C#\\Repos\\MiPrimeraApi2\\MiApiDeEjemplo\\MiPrimeraApi2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vikko\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\vikko\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

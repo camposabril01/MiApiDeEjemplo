@@ -1,5 +1,4 @@
 ﻿using MiPrimeraApi2.Model;
-using System.Data;//deletear despues
 using System.Data.SqlClient; 
 
 namespace MiPrimeraApi2.Repository
@@ -9,36 +8,41 @@ namespace MiPrimeraApi2.Repository
         public const string ConnectionString =
        "Server = UTOPÍA\\SQLEXPRESS; Database = SistemaGestion; Trusted_Connection = True; Persist Security Info=False; Encrypt=False";
 
+
         public static List<Producto> GetProductos()
         {
-            List<Producto> resultado = new List<Producto>();
-
+            List<Producto> resultados = new List<Producto>();
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand())
+                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Producto", sqlConnection))
                 {
-                    sqlCommand.Connection = sqlConnection;
-                    sqlCommand.Connection.Open();
-                    sqlCommand.CommandText = "SELECT * FROM Productos;";
+                    sqlConnection.Open();
 
-                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-
-                    sqlDataAdapter.SelectCommand = sqlCommand;
-
-                    DataTable table = new DataTable();
-
-                    sqlDataAdapter.Fill(table);
-
-                    sqlCommand.Connection.Close();
-
-                    foreach (DataRow row in table.Rows)
+                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
                     {
-                        Producto producto = new Producto();
+                        //chequea si hay filas
+                        if (dataReader.HasRows)
+                        {
+                            while(dataReader.Read())
+                            {
+                                Producto producto = new Producto();
 
-                        producto.Id = Convert.ToInt32(row["Id"]);
+                                producto.Id = Convert.ToInt32(dataReader["Id"]);
+                                producto.Descripciones = dataReader["Descripciones"].ToString();
+                                producto.Costo = Convert.ToDouble(dataReader["Costo"]);
+                                producto.PrecioVenta = Convert.ToDouble(dataReader["PrecioVenta"]);
+                                producto.Stock = Convert.ToInt32(dataReader["Stock"]);
+
+                                resultados.Add(producto);
+                            }
+                        }
                     }
+
+                    sqlConnection.Close();
                 }
             }
+
+            return resultados;
         }
     }
 }

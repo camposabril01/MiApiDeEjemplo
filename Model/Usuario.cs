@@ -9,5 +9,14 @@
         public string NombreUsuario { get; set; }
         public string Mail { get; set; }
 
+        //public Usuario(int id, string nombre, string apellido, string nombreUsuario, string contrasena, string mail)
+        //{
+        //    Id = id;
+        //    Nombre = nombre;
+        //    Apellido = apellido;
+        //    NombreUsuario = nombreUsuario;
+        //    Contraseña = contrasena;
+        //    Mail = mail;
+        //}
     }
 }
