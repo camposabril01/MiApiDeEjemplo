@@ -78,5 +78,30 @@ namespace MiPrimeraApi2.Repository
 
             return resultado;
         }
+
+        public static bool EliminarUsuario(int id)
+        {
+            bool resultado = false;
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "DELETE FROM Usuario WHERE ID = @id";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@id", SqlDbType.BigInt);
+                    sqlCommand.Parameters["@id"].Value = id;
+                    sqlConnection.Open();
+
+                    int numberOfRows = sqlCommand.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        resultado = true;
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+
+            return resultado;
+        }
     }
 }

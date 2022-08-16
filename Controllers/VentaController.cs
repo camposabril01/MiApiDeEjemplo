@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MiPrimeraApi2.DTOS;
 using MiPrimeraApi2.Model;
 using MiPrimeraApi2.Repository;
 
@@ -12,6 +13,24 @@ namespace MiPrimeraApi2.Controllers
         public List<Venta> GetVentas()
         {
             return VentaHandler.GetVentas();
+        }
+
+        [HttpDelete(Name = "DeleteVenta")]
+        public bool EliminarUsuario([FromBody] int id)
+        {
+            return VentaHandler.EliminarVenta(id);
+        }
+
+        [HttpPut]
+        public void ModificarUsuario([FromBody] PutUsuario usuario)
+        {
+
+        }
+
+        [HttpPost]
+        public void CrearUsuario([FromBody] PostUsuario usuario)
+        {
+
         }
     }
 }

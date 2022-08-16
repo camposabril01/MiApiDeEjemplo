@@ -1,4 +1,5 @@
 ﻿using MiPrimeraApi2.Model;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace MiPrimeraApi2.Repository
@@ -40,6 +41,31 @@ namespace MiPrimeraApi2.Repository
             }
 
             return resultados;
+        }
+
+        public static bool EliminarVenta(int id)
+        {
+            bool resultado = false;
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "DELETE FROM Venta WHERE ID = @id";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@id", SqlDbType.BigInt);
+                    sqlCommand.Parameters["@id"].Value = id;
+                    sqlConnection.Open();
+
+                    int numberOfRows = sqlCommand.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        resultado = true;
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+
+            return resultado;
         }
     }
 }
