@@ -23,13 +23,13 @@ namespace MiPrimeraApi2.Controllers
         }
 
         [HttpPut]
-        public void ModificarProducto([FromBody] PutProductoVendido productoVendido)
+        public void ModificarProductoVendido([FromBody] PutProductoVendido productoVendido)
         {
 
         }
 
         [HttpPost]
-        public void CrearProducto([FromBody] PostProductoVendido productoVendido)
+        public void CrearProductoVendido([FromBody] PostProductoVendido productoVendido)
         {
 
         }

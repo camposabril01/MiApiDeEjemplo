@@ -33,13 +33,20 @@ namespace MiPrimeraApi2.Controllers
         [HttpPut]
         public void ModificarUsuario([FromBody] PutUsuario usuario)
         {
-
+            UsuarioHandler.ModificarUsuario(usuario);
         }
 
         [HttpPost]
-        public void CrearUsuario([FromBody] PostUsuario usuario)
+        public bool CrearUsuario([FromBody] PostUsuario usuario)
         {
-
+            return UsuarioHandler.CrearUsuario(new Usuario
+            {
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                Contraseña = usuario.Contraseña,
+                Mail = usuario.Mail,
+                NombreUsuario = usuario.NombreUsuario
+            });
         }
     }
 }

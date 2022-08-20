@@ -1,6 +1,7 @@
 ﻿using MiPrimeraApi2.Model;
 using System.Data;
 using System.Data.SqlClient;
+using MiPrimeraApi2.DTOS;
 
 namespace MiPrimeraApi2.Repository
 {
@@ -89,6 +90,73 @@ namespace MiPrimeraApi2.Repository
                 {
                     sqlCommand.Parameters.Add("@id", SqlDbType.BigInt);
                     sqlCommand.Parameters["@id"].Value = id;
+                    sqlConnection.Open();
+
+                    int numberOfRows = sqlCommand.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        resultado = true;
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+
+            return resultado;
+        }
+
+        public static void ModificarUsuario(PutUsuario usuario)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "UPDATE Usuario SET Nombre = @nombre, Apellido = @apellido, Contraseña = @contrasena, " +
+                    "NombreUsuario = @nombreUsuario, Mail = @mail " +
+                    "WHERE ID = @id";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@id", SqlDbType.BigInt);
+                    sqlCommand.Parameters["@id"].Value = usuario.Id;
+                    sqlCommand.Parameters.Add("@nombre", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@nombre"].Value = usuario.Nombre;
+                    sqlCommand.Parameters.Add("@apellido", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@apellido"].Value = usuario.Apellido;
+                    sqlCommand.Parameters.Add("@contrasena", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@contrasena"].Value = usuario.Contraseña;
+                    sqlCommand.Parameters.Add("@nombreUsuario", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@nombreUsuario"].Value = usuario.NombreUsuario;
+                    sqlCommand.Parameters.Add("@mail", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@mail"].Value = usuario.Mail;
+
+                    sqlConnection.Open();
+
+                    sqlCommand.ExecuteNonQuery();
+                    
+                    sqlConnection.Close();
+                }
+            }
+
+        }
+        public static bool CrearUsuario(Usuario usuario)
+        {
+            bool resultado = false;
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "INSERT INTO [SistemaGestion].[dbo].[Usuario] " +
+                    "(Nombre, Apellido, Contraseña, NombreUsuario, Mail) VALUES " +
+                    "(@nombre, @apellido, @contrasena, @nombreUsuario, @mail)";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@nombre", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@nombre"].Value = usuario.Nombre;
+                    sqlCommand.Parameters.Add("@apellido", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@apellido"].Value = usuario.Apellido;
+                    sqlCommand.Parameters.Add("@contrasena", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@contrasena"].Value = usuario.Contraseña;
+                    sqlCommand.Parameters.Add("@nombreUsuario", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@nombreUsuario"].Value = usuario.NombreUsuario;
+                    sqlCommand.Parameters.Add("@mail", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@mail"].Value = usuario.Mail;
+
                     sqlConnection.Open();
 
                     int numberOfRows = sqlCommand.ExecuteNonQuery();

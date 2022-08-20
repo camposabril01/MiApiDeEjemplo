@@ -17,21 +17,24 @@ namespace MiPrimeraApi2.Controllers
         }
 
         [HttpDelete(Name = "DeleteVenta")]
-        public bool EliminarUsuario([FromBody] int id)
+        public bool EliminarVenta([FromBody] int id)
         {
             return VentaHandler.EliminarVenta(id);
         }
 
         [HttpPut]
-        public void ModificarUsuario([FromBody] PutVenta venta)
+        public void ModificarVenta([FromBody] PutVenta venta)
         {
 
         }
 
         [HttpPost]
-        public void CrearUsuario([FromBody] PostVenta venta)
+        public bool CrearVenta([FromBody] PostVenta venta)
         {
-
+            return VentaHandler.CrearVenta(new Venta
+            {
+                Comentarios = venta.Comentarios
+            });
         }
     }
 }

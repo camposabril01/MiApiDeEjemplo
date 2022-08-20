@@ -67,5 +67,33 @@ namespace MiPrimeraApi2.Repository
 
             return resultado;
         }
+        public static bool CrearVenta(Venta venta)
+        {
+            bool resultado = false;
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "INSERT INTO [SistemaGestion].[dbo].[Venta] " +
+                    "(Comentarios) VALUES " +
+                    "(@comentarios)";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@comentarios", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@comentarios"].Value = venta.Comentarios;
+                    
+
+                    sqlConnection.Open();
+
+                    int numberOfRows = sqlCommand.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        resultado = true;
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+
+            return resultado;
+        }
     }
 }
