@@ -1,4 +1,5 @@
 ﻿using MiPrimeraApi2.Model;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace MiPrimeraApi2.Repository
@@ -42,6 +43,56 @@ namespace MiPrimeraApi2.Repository
             }
 
             return resultados;
+        }
+
+        public static bool EliminarProductoVendido(int id)
+        {
+            bool resultado = false;
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "DELETE FROM ProductoVendido WHERE ID = @id";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@id", SqlDbType.BigInt);
+                    sqlCommand.Parameters["@id"].Value = id;
+                    sqlConnection.Open();
+
+                    int numberOfRows = sqlCommand.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        resultado = true;
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+
+            return resultado;
+        }
+
+        public static bool EliminarPVSegunIdProducto(int idProducto)
+        {
+            bool resultado = false;
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "DELETE FROM ProductoVendido WHERE ID = @idProducto";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@idProducto", SqlDbType.BigInt);
+                    sqlCommand.Parameters["@idProducto"].Value = idProducto;
+                    sqlConnection.Open();
+
+                    int numberOfRows = sqlCommand.ExecuteNonQuery();
+                    if (numberOfRows > 0)
+                    {
+                        resultado = true;
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+
+            return resultado;
         }
     }
 }
