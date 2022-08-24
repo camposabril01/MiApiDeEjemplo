@@ -25,7 +25,7 @@ namespace MiPrimeraApi2.Controllers
         [HttpPut]
         public void ModificarVenta([FromBody] PutVenta venta)
         {
-
+            VentaHandler.ModificarVenta(venta);
         }
 
         [HttpPost]

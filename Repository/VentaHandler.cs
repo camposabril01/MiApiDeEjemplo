@@ -1,4 +1,5 @@
-﻿using MiPrimeraApi2.Model;
+﻿using MiPrimeraApi2.Controllers.DTOS;
+using MiPrimeraApi2.Model;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -94,6 +95,28 @@ namespace MiPrimeraApi2.Repository
             }
 
             return resultado;
+        }
+        public static void ModificarVenta(PutVenta venta)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "UPDATE Venta SET Comentarios = @comentarios " +
+                    "WHERE ID = @id";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@id", SqlDbType.BigInt);
+                    sqlCommand.Parameters["@id"].Value = venta.Id;
+                    sqlCommand.Parameters.Add("@comentarios", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@comentarios"].Value = venta.Comentarios;
+
+                    sqlConnection.Open();
+
+                    sqlCommand.ExecuteNonQuery();
+
+                    sqlConnection.Close();
+                }
+            }
+
         }
     }
 }
