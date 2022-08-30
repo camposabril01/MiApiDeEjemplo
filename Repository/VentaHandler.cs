@@ -11,12 +11,15 @@ namespace MiPrimeraApi2.Repository
        "Server = UTOPÍA\\SQLEXPRESS; Database = SistemaGestion; Trusted_Connection = True; Persist Security Info=False; Encrypt=False";
 
 
-        public static List<Venta> GetVentas()
+        public static List<VentaProducto> GetVentas()
         {
-            List<Venta> resultados = new List<Venta>();
+            List<VentaProducto> resultados = new List<VentaProducto>();
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Venta", sqlConnection))
+                string commandText = "SELECT  v.Id AS IdVenta, p.Id AS IdProducto, p.Descripciones, pv.Stock, v.Comentarios FROM Producto AS p " +
+                    "INNER JOIN ProductoVendido AS pv ON p.Id = pv.IdProducto " +
+                    "INNER JOIN Venta AS v ON pv.IdVenta = v.Id;";
+                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
                 {
                     sqlConnection.Open();
 
@@ -27,12 +30,15 @@ namespace MiPrimeraApi2.Repository
                         {
                             while (dataReader.Read())
                             {
-                                Venta venta = new Venta();
+                                VentaProducto ventaProducto = new VentaProducto();
 
-                                venta.Id = Convert.ToInt32(dataReader["Id"]);
-                                venta.Comentarios = dataReader["Comentarios"].ToString();
+                                ventaProducto.Id = Convert.ToInt32(dataReader["IdVenta"]);
+                                ventaProducto.Comentarios = dataReader["Comentarios"].ToString();
+                                ventaProducto.IdProducto = Convert.ToInt32(dataReader["IdProducto"]);
+                                ventaProducto.Descripciones = dataReader["Descripciones"].ToString();
+                                ventaProducto.Stock = Convert.ToInt32(dataReader["Stock"]);
 
-                                resultados.Add(venta);
+                                resultados.Add(ventaProducto);
                             }
                         }
                     }

@@ -11,7 +11,7 @@ namespace MiPrimeraApi2.Controllers
     public class VentaController : ControllerBase
     {
         [HttpGet(Name = "GetVentas")]
-        public List<Venta> GetVentas()
+        public List<VentaProducto> GetVentas()
         {
             return VentaHandler.GetVentas();
         }
