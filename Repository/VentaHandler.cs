@@ -1,4 +1,5 @@
-﻿using MiPrimeraApi2.Controllers.DTOS;
+﻿using MiPrimeraApi2.Controllers;
+using MiPrimeraApi2.Controllers.DTOS;
 using MiPrimeraApi2.Model;
 using System.Data;
 using System.Data.SqlClient;
@@ -53,6 +54,35 @@ namespace MiPrimeraApi2.Repository
         public static bool EliminarVenta(int id)
         {
             bool resultado = false;
+            List<ProductoVendido> modificarProducto = new List<ProductoVendido>();
+            modificarProducto = ProductoVendidoHandler.GetProductosVendidosSegunId(id);
+            foreach (ProductoVendido productoVendido in modificarProducto)
+            {
+                if(productoVendido.IdVenta == id) 
+                {
+                    ProductoVendidoHandler.EliminarProductoVendido(productoVendido.Id);
+                }
+                //((Esto no va acá ni es lo correcto, tendria que estar en ProductoHandler hecho mejor))
+                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+                {
+                    string commandText = "UPDATE Producto SET Stock = Stock + @stock " +
+                        "WHERE Id = @idProducto";
+                    using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                    {
+                        sqlCommand.Parameters.Add("@idProducto", SqlDbType.BigInt);
+                        sqlCommand.Parameters["@idProducto"].Value = productoVendido.Id;
+                        sqlCommand.Parameters.Add("@stock", SqlDbType.BigInt);
+                        sqlCommand.Parameters["@stock"].Value = productoVendido.Stock;
+
+                        sqlConnection.Open();
+
+                        sqlCommand.ExecuteNonQuery();
+
+                        sqlConnection.Close();
+                    }
+                }
+            }
+            
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
                 string commandText = "DELETE FROM Venta WHERE ID = @id";
