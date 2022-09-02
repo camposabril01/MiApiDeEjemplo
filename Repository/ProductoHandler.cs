@@ -35,6 +35,7 @@ namespace MiPrimeraApi2.Repository
                                 producto.Costo = Convert.ToDouble(dataReader["Costo"]);
                                 producto.PrecioVenta = Convert.ToDouble(dataReader["PrecioVenta"]);
                                 producto.Stock = Convert.ToInt32(dataReader["Stock"]);
+                                producto.IdUsuario = Convert.ToInt32(dataReader["IdUsuario"]);
 
                                 resultados.Add(producto);
                             }

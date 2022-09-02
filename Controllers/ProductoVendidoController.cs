@@ -11,9 +11,9 @@ namespace MiPrimeraApi2.Controllers
     public class ProductoVendidoController : ControllerBase
     {
         [HttpGet(Name = "GetProductosVendidos")]
-        public List<ProductoVendido> GetProductosVendidos()
+        public List<ProductoVendido> GetProductosVendidos(int idUsuario)
         {
-            return ProductoVendidoHandler.GetProductosVendidos();
+            return ProductoVendidoHandler.GetProductosVendidos(idUsuario);
         }
 
         [HttpDelete(Name = "DeleteProductoVendido")]

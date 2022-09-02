@@ -2,6 +2,7 @@
 using MiPrimeraApi2.Model;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Contracts;
 
 namespace MiPrimeraApi2.Repository
 {
@@ -11,9 +12,21 @@ namespace MiPrimeraApi2.Repository
        "Server = UTOPÍA\\SQLEXPRESS; Database = SistemaGestion; Trusted_Connection = True; Persist Security Info=False; Encrypt=False";
 
 
-        public static List<ProductoVendido> GetProductosVendidos()
+        public static List<ProductoVendido> GetProductosVendidos(int id)
         {
             List<ProductoVendido> resultados = new List<ProductoVendido>();
+            List<Producto> producto = new List<Producto>();
+            List<Producto> productoPorUsuario = new List<Producto>();
+
+            producto = ProductoHandler.GetProductos();
+            foreach (Producto item in producto)
+            {
+                if(item.IdUsuario == id)
+                {
+                    productoPorUsuario.Add(item);
+                }
+            }
+
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
                 using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM ProductoVendido", sqlConnection))
@@ -33,8 +46,16 @@ namespace MiPrimeraApi2.Repository
                                 productoVendido.IdProducto = Convert.ToInt32(dataReader["IdProducto"]);
                                 productoVendido.Stock = Convert.ToInt32(dataReader["Stock"]);
                                 productoVendido.IdVenta = Convert.ToInt32(dataReader["IdVenta"]);
-
-                                resultados.Add(productoVendido);
+                                    
+                                //agregar comparacion aca
+                                foreach(Producto item in productoPorUsuario)
+                                {
+                                    if(productoVendido.IdProducto == item.Id)
+                                    {
+                                        resultados.Add(productoVendido);
+                                    }
+                                }
+                                    
                             }
                         }
                     }
