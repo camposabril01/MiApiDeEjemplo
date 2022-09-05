@@ -8,3 +8,8 @@
 
 ## Desafio Clase 15
 ** Integración de APIs con ADO.NET:** Los métodos que hacian falta fueron creados. EliminarProducto fue modificado para que elimine de la tabla ProductoVendido antes que nada para evitar conflictos. 
+
+## Entrega Final
+** CRUD acorde a consignas. **
+
+Nota: Por alguna razón no funciona bien con Postman en querys mas complejas, no toma bien los numeros. Esos los hago por Swagger directamente.
