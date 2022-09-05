@@ -104,14 +104,17 @@ namespace MiPrimeraApi2.Repository
 
             return resultado;
         }
-        public static bool CrearVenta(Venta venta)
+        public static bool CrearVenta(Venta venta, List<Producto> producto, int idUsuario)
         {
             bool resultado = false;
+            int ultimoIdVenta = 0;
+            //Paso 1: cargar venta nueva
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
                 string commandText = "INSERT INTO [SistemaGestion].[dbo].[Venta] " +
                     "(Comentarios) VALUES " +
-                    "(@comentarios)";
+                    "(@comentarios); " +
+                    "SELECT CAST (scope_identity() AS int);";
                 using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
                 {
                     sqlCommand.Parameters.Add("@comentarios", SqlDbType.VarChar);
@@ -119,17 +122,57 @@ namespace MiPrimeraApi2.Repository
                     
 
                     sqlConnection.Open();
-
-                    int numberOfRows = sqlCommand.ExecuteNonQuery();
-                    if (numberOfRows > 0)
+                    //Paso 2: Conseguir ultimo ID de venta
+                    ultimoIdVenta = (Int32)sqlCommand.ExecuteScalar();
+                    if (ultimoIdVenta > 0)
                     {
                         resultado = true;
                     }
-
+                    
                     sqlConnection.Close();
                 }
             }
+            //Paso 3: Insertar y eliminar
+            foreach(Producto item in producto)
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+                {
+                    string commandText = "INSERT INTO [SistemaGestion].[dbo].[ProductoVendido] " +
+                        "(IdProducto, Stock, IdVenta) VALUES " +
+                        "(@idProducto, @stock, @idVenta)";
+                    using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                    {
+                        sqlCommand.Parameters.Add("@idProducto", SqlDbType.BigInt);
+                        sqlCommand.Parameters["@idProducto"].Value = item.Id;
+                        sqlCommand.Parameters.Add("@stock", SqlDbType.BigInt);
+                        sqlCommand.Parameters["@stock"].Value = item.Stock;
+                        sqlCommand.Parameters.Add("@idVenta", SqlDbType.BigInt);
+                        sqlCommand.Parameters["@idVenta"].Value = ultimoIdVenta;
 
+                        sqlConnection.Open();
+
+                        sqlCommand.ExecuteNonQuery();
+
+                        sqlConnection.Close();
+                    }
+
+                    string commandText2 = "UPDATE Producto SET Stock = Stock - @stock " +
+                                "WHERE Id = @idProducto";
+                    using (SqlCommand sqlCommand = new SqlCommand(commandText2, sqlConnection))
+                    {
+                        sqlCommand.Parameters.Add("@idProducto", SqlDbType.BigInt);
+                        sqlCommand.Parameters["@idProducto"].Value = item.Id;
+                        sqlCommand.Parameters.Add("@stock", SqlDbType.BigInt);
+                        sqlCommand.Parameters["@stock"].Value = item.Stock;
+
+                        sqlConnection.Open();
+
+                        sqlCommand.ExecuteNonQuery();
+                        sqlConnection.Close();
+                    }
+                }
+            }
+           
             return resultado;
         }
         public static void ModificarVenta(PutVenta venta)

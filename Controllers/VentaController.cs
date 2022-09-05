@@ -29,12 +29,14 @@ namespace MiPrimeraApi2.Controllers
         }
 
         [HttpPost]
-        public bool CrearVenta([FromBody] PostVenta venta)
+        public bool CrearVenta([FromBody] PostVenta venta, int idUsuario)
         {
+            List<Producto> producto = new List<Producto>();
+            producto = ProductoHandler.GetProductos();
             return VentaHandler.CrearVenta(new Venta
             {
                 Comentarios = venta.Comentarios
-            });
+            }, producto, idUsuario);
         }
     }
 }
