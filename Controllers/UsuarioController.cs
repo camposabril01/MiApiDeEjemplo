@@ -21,6 +21,10 @@ namespace MiPrimeraApi2.Controllers
             bool permitirLogin;
             permitirLogin = UsuarioHandler.GetUsuarioAndContrasena(nombreUsuario, contraseña);
 
+            if (!permitirLogin)
+            {
+                Console.WriteLine("¡Datos inválidos!");
+            }
             return permitirLogin;
         }
 

@@ -11,7 +11,7 @@ namespace MiPrimeraApi2.Controllers
     public class VentaController : ControllerBase
     {
         [HttpGet(Name = "GetVentas")]
-        public List<Venta> GetVentas()
+        public List<VentaProducto> GetVentas()
         {
             return VentaHandler.GetVentas();
         }
@@ -25,16 +25,18 @@ namespace MiPrimeraApi2.Controllers
         [HttpPut]
         public void ModificarVenta([FromBody] PutVenta venta)
         {
-
+            VentaHandler.ModificarVenta(venta);
         }
 
         [HttpPost]
-        public bool CrearVenta([FromBody] PostVenta venta)
+        public bool CrearVenta([FromBody] PostVenta venta, int idUsuario)
         {
+            List<Producto> producto = new List<Producto>();
+            producto = ProductoHandler.GetProductos();
             return VentaHandler.CrearVenta(new Venta
             {
                 Comentarios = venta.Comentarios
-            });
+            }, producto, idUsuario);
         }
     }
 }

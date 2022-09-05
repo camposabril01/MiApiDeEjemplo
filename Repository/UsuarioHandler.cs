@@ -48,6 +48,34 @@ namespace MiPrimeraApi2.Repository
             return resultados;
         }
 
+        public static bool GetUsuarioFromUsername(string nUsuario)
+        {
+            bool userExists = false;
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string commandText = "SELECT Usuario.NombreUsuario FROM Usuario WHERE NombreUsuario = @nUsuario";
+
+                using (SqlCommand sqlCommand = new SqlCommand
+                                (commandText, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@nUsuario", SqlDbType.VarChar);
+                    sqlCommand.Parameters["@nUsuario"].Value = nUsuario;
+
+                    sqlConnection.Open();
+                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
+                    {
+                        SqlCommand command = new SqlCommand(commandText, sqlConnection);
+                        //chequea si hay filas
+                        if (dataReader.HasRows)
+                        {
+                            userExists = true;
+                        }
+                    }
+                    sqlConnection.Close();
+                }
+            }
+            return userExists;
+        }
         public static bool GetUsuarioAndContrasena(string nUsuario, string nContrasena)
         {
             bool resultado = false;
@@ -139,35 +167,39 @@ namespace MiPrimeraApi2.Repository
         public static bool CrearUsuario(Usuario usuario)
         {
             bool resultado = false;
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            if(!GetUsuarioFromUsername(usuario.NombreUsuario))
             {
-                string commandText = "INSERT INTO [SistemaGestion].[dbo].[Usuario] " +
-                    "(Nombre, Apellido, Contraseña, NombreUsuario, Mail) VALUES " +
-                    "(@nombre, @apellido, @contrasena, @nombreUsuario, @mail)";
-                using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
+                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
                 {
-                    sqlCommand.Parameters.Add("@nombre", SqlDbType.VarChar);
-                    sqlCommand.Parameters["@nombre"].Value = usuario.Nombre;
-                    sqlCommand.Parameters.Add("@apellido", SqlDbType.VarChar);
-                    sqlCommand.Parameters["@apellido"].Value = usuario.Apellido;
-                    sqlCommand.Parameters.Add("@contrasena", SqlDbType.VarChar);
-                    sqlCommand.Parameters["@contrasena"].Value = usuario.Contraseña;
-                    sqlCommand.Parameters.Add("@nombreUsuario", SqlDbType.VarChar);
-                    sqlCommand.Parameters["@nombreUsuario"].Value = usuario.NombreUsuario;
-                    sqlCommand.Parameters.Add("@mail", SqlDbType.VarChar);
-                    sqlCommand.Parameters["@mail"].Value = usuario.Mail;
-
-                    sqlConnection.Open();
-
-                    int numberOfRows = sqlCommand.ExecuteNonQuery();
-                    if (numberOfRows > 0)
+                    string commandText = "INSERT INTO [SistemaGestion].[dbo].[Usuario] " +
+                        "(Nombre, Apellido, Contraseña, NombreUsuario, Mail) VALUES " +
+                        "(@nombre, @apellido, @contrasena, @nombreUsuario, @mail)";
+                    using (SqlCommand sqlCommand = new SqlCommand(commandText, sqlConnection))
                     {
-                        resultado = true;
-                    }
+                        sqlCommand.Parameters.Add("@nombre", SqlDbType.VarChar);
+                        sqlCommand.Parameters["@nombre"].Value = usuario.Nombre;
+                        sqlCommand.Parameters.Add("@apellido", SqlDbType.VarChar);
+                        sqlCommand.Parameters["@apellido"].Value = usuario.Apellido;
+                        sqlCommand.Parameters.Add("@contrasena", SqlDbType.VarChar);
+                        sqlCommand.Parameters["@contrasena"].Value = usuario.Contraseña;
+                        sqlCommand.Parameters.Add("@nombreUsuario", SqlDbType.VarChar);
+                        sqlCommand.Parameters["@nombreUsuario"].Value = usuario.NombreUsuario;
+                        sqlCommand.Parameters.Add("@mail", SqlDbType.VarChar);
+                        sqlCommand.Parameters["@mail"].Value = usuario.Mail;
 
-                    sqlConnection.Close();
+                        sqlConnection.Open();
+
+                        int numberOfRows = sqlCommand.ExecuteNonQuery();
+                        if (numberOfRows > 0)
+                        {
+                            resultado = true;
+                        }
+
+                        sqlConnection.Close();
+                    }
                 }
             }
+            
 
             return resultado;
         }

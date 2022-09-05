@@ -11,9 +11,9 @@ namespace MiPrimeraApi2.Controllers
     public class ProductoVendidoController : ControllerBase
     {
         [HttpGet(Name = "GetProductosVendidos")]
-        public List<ProductoVendido> GetProductosVendidos()
+        public List<ProductoVendido> GetProductosVendidos(int idUsuario)
         {
-            return ProductoVendidoHandler.GetProductosVendidos();
+            return ProductoVendidoHandler.GetProductosVendidos(idUsuario);
         }
 
         [HttpDelete(Name = "DeleteProductoVendido")]
@@ -25,13 +25,18 @@ namespace MiPrimeraApi2.Controllers
         [HttpPut]
         public void ModificarProductoVendido([FromBody] PutProductoVendido productoVendido)
         {
-
+            ProductoVendidoHandler.ModificarProductoVendido(productoVendido);
         }
 
         [HttpPost]
-        public void CrearProductoVendido([FromBody] PostProductoVendido productoVendido)
+        public bool CrearProductoVendido([FromBody] PostProductoVendido productoVendido)
         {
-
+            return ProductoVendidoHandler.CrearProductoVendido(new ProductoVendido
+            {
+                IdProducto = productoVendido.IdProducto,
+                Stock = productoVendido.Stock,
+                IdVenta = productoVendido.IdVenta
+            });
         }
     }
 }
